@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maiasa Mohammad - Student Portfolio</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    nav { background-color: #333; padding: 10px; position: sticky; top: 0; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    section { padding: 40px; }
+    footer { background-color: #333; color: white; text-align: center; padding: 20px; }
+    img { max-width: 200px; margin: 10px; cursor: pointer; transition: transform 0.2s; }
+    img:hover { transform: scale(1.05); }
+    form { display: flex; flex-direction: column; max-width: 300px; }
+    form input, form textarea { margin-bottom: 10px; padding: 8px; }
+    form button { padding: 10px; background-color: #333; color: white; border: none; cursor: pointer; }
+    form button:hover { background-color: #555; }
+
+    /* Lightbox styles */
+    .lightbox { display: none; position: fixed; z-index: 999; padding-top: 60px;
+      left: 0; top: 0; width: 100%; height: 100%; overflow: auto;
+      background-color: rgba(0,0,0,0.9); }
+    .lightbox-content { margin: auto; display: block; max-width: 80%; }
+    .close { position: absolute; top: 20px; right: 35px; color: #fff;
+      font-size: 40px; font-weight: bold; cursor: pointer; }
+    .prev, .next { cursor: pointer; position: absolute; top: 50%; width: auto;
+      padding: 16px; margin-top: -50px; color: #fff; font-weight: bold;
+      font-size: 30px; transition: 0.3s; user-select: none; }
+    .prev { left: 0; } .next { right: 0; }
+    .prev:hover, .next:hover { color: #bbb; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#pictures">Pictures</a>
+    <a href="#contact">Contact</a>
+    <a href="#video">Video</a>
+    <a href="#footer">Footer</a>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home">
+    <h1>Welcome to Maiasa Mohammad’s Portfolio</h1>
+    <p>Hello! My name is Maiasa Mohammad, and this page showcases my work, interests, and projects as a student. Use the navigation bar above to explore different sections.</p>
+  </section>
+
+  <!-- Pictures Section -->
+  <section id="pictures">
+    <h2>Gallery</h2>
+    <p>Here are some snapshots that represent my journey as a student:</p>
+    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1" alt="Study Session" onclick="openLightbox(0)">
+    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b" alt="Campus Life" onclick="openLightbox(1)">
+    <img src="https://images.unsplash.com/photo-1581090700227-4c4f7a3a3f3a" alt="Project Showcase" onclick="openLightbox(2)">
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Maiasa</h2>
+    <form>
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message for Maiasa" rows="4" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- Video Section -->
+  <section id="video">
+    <h2>My Favorite Learning Resource</h2>
+    <p>Here’s a video that inspires me in my studies:</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/2ePf9rue1Ao" 
+      title="Study Motivation Video" frameborder="0" allowfullscreen></iframe>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <p>&copy; 2026 Maiasa Mohammad. Student Portfolio Website.</p>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+  </div>
+
+  <script>
+    const images = [
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1",
+      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
+      "https://images.unsplash.com/photo-1581090700227-4c4f7a3a3f3a"
+    ];
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      document.getElementById("lightbox").style.display = "block";
+      document.getElementById("lightbox-img").src = images[currentIndex];
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").style.display = "none";
+    }
+
+    function changeSlide(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = images.length - 1;
+      if (currentIndex >= images.length) currentIndex = 0;
+      document.getElementById("lightbox-img").src = images[currentIndex];
+    }
+
+    window.onclick = function(event) {
+      const lightbox = document.getElementById("lightbox");
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    }
+  </script>
+
+</body>
+</html>
